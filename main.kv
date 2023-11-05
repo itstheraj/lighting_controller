@@ -1,0 +1,31 @@
+#:kivy 1.10.0
+
+<LoadingScreen>:
+    GridLayout:
+        rows: 2
+        MDLabel:
+            text: "Loading"
+            
+<LightScreen>:
+    GridLayout:
+        cols: 1
+        rows: 7
+        MDFlatButton: 
+            text: "Toggle white light mode? (On/Off)"
+            on_press: root.toggle_white()
+        MDLabel:
+            text: "Which room?"
+        MDFlatButton:
+            text: "Living Room"
+        MDFlatButton:
+            text: "Front Door"
+        MDFlatButton:
+            text: "Foyer"
+        MDFlatButton:
+            text: "Kitchen"
+        MDFlatButton:
+            text: "Bedroom"
+        MDFlatButton:
+            text: "Laundry Hall"
+        
+        
