@@ -11,3 +11,7 @@ $ python3 main.py
 ```
 
 You would need some apparatus to use TinyTuya / JSONs in the main folder with API keys etc. This is just a quick example.
+
+It would look a little like this:
+
+![Screenshot 2023-11-05 12 22 01 PM](https://github.com/itstheraj/lighting_controller/assets/19713518/c9513e8f-e4c8-460b-a17f-cabe2e8cc938)
