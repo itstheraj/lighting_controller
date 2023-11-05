@@ -1,11 +1,13 @@
 from kivymd.app import MDApp
-from kivy.lang import Builder
-from kivy.uix.screenmanager import ScreenManager, Screen
-import tinytuya
+from kivymd.uix.screen import MDScreen
+from kivymd.uix.button import MDRectangleFlatButton
+from kivymd.uix.gridlayout import MDGridLayout
+from kivymd.uix.label import MDLabel
 from kivy.uix.screenmanager import Screen
-import threading
 from kivy.properties import ObjectProperty
-from kivy.core.window import Window
+import tinytuya
+import threading
+
 class LoadingScreen(Screen):
     pass
 
@@ -29,9 +31,6 @@ class LightScreen(Screen):
                 device.set_colour(*self.color_dict[item['gwId']])
         
         self.toggle_ct = not self.toggle_ct
-        
-with open('main.kv') as f:
-    Builder.load_string(f.read())
 
 class MainApp(MDApp):
     MAPPER = {
@@ -83,19 +82,78 @@ class MainApp(MDApp):
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Orange"
 
-        self.sm = ScreenManager()
+        #self.sm = ScreenManager()
         
         threading.Thread(target = self.init_lights).start()
         
         #loading = LoadingScreen(name = 'loading')
-        self.lights = LightScreen(self.dlist, name = 'lighting')
-        Window.bind(on_keyboard=self.on_keyboard)
+        #self.lights = LightScreen(self.dlist, name = 'lighting')
+        #Window.bind(on_keyboard=self.on_keyboard)
         
-        self.screen_list = [self.lights]
+        #self.screen_list = [self.lights]
         
         #self.sm.add_widget(loading)
-        self.sm.add_widget(self.lights)
+        #self.sm.add_widget(self.lights)
+
+        grid_layout = MDGridLayout(cols=1, padding=100)
+
+        btn_1 = MDRectangleFlatButton(
+            text="Toggle white light mode? (On/Off)",
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            size_hint=(1, 1)
+        )
+
+        label_1 = MDLabel(
+            text="Which room?",
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            halign="center",
+        )
+
+        btn_2 = MDRectangleFlatButton(
+            text="Living Room",
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            size_hint=(1, 1)
+        )
+
+        btn_3 = MDRectangleFlatButton(
+            text="Front Door",
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            size_hint=(1, 1)
+        )
+
+        btn_4 = MDRectangleFlatButton(
+            text="Foyer",
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            size_hint=(1, 1)
+        )
+
+        btn_5 = MDRectangleFlatButton(
+            text="Kitchen",
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            size_hint=(1, 1)
+        )
+
+        btn_6 = MDRectangleFlatButton(
+            text="Bedroom",
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            size_hint=(1, 1)
+        )
+
+        btn_7 = MDRectangleFlatButton(
+            text="Laundry Hall",
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            size_hint=(1, 1)
+        )
+
+        grid_layout.add_widget(btn_1)
+        grid_layout.add_widget(label_1)
+        grid_layout.add_widget(btn_2)
+        grid_layout.add_widget(btn_3)
+        grid_layout.add_widget(btn_4)
+        grid_layout.add_widget(btn_5)
+        grid_layout.add_widget(btn_6)
+        grid_layout.add_widget(btn_7)
         
-        return self.sm
+        return MDScreen(grid_layout)
 
 MainApp().run()
